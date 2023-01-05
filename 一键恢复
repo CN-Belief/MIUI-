@@ -34,8 +34,7 @@ int main()
 		system("adb shell pm able-user com.miui.CatchLog");//收集日志 
 		system("adb shell pm able-user com.miui.KeyChain");//密钥链，中国用不到
 		system("adb shell pm able-user com.xiaomi.powerchecker");//耗电检测 
-		system("adb shell pm able-user com.xiaomi.payment");//米币支付 
-		system("adb shell pm able-user com.mipay.wallet");//小米钱包 
+		system("adb shell pm able-user com.xiaomi.payment");//米币支付  
 		system("adb shell pm able-user com.miui.yellowpage");//生活黄页 
 		system("adb shell pm able-user com.xiaomi.youpin");//小米有品
 		system("adb shell pm able-user com.mfashiongallery.emag");//小米画报
