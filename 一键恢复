@@ -15,7 +15,7 @@ int main()
 		system("adb shell rm -f -r /sdcard/Android/data/com.miui.systemAdSolution/files");//删除开屏广告 
 		cout<<"恢复成功，重启生效"<<endl;
 	}
-	cout<<"是否恢复系统更新"<<endl<<"输入1 = 恢复 输入0 = 不恢复" ;
+	cout<<"是否恢复系统更新"<<endl<<"输入1 = 恢复 输入0 = 不恢复"<<endl;
 	cin>>YN;
 	if(YN==1)
 	{
@@ -23,6 +23,7 @@ int main()
 		cout<<"恢复成功，重启生效"<<endl;
 	}
 	cout<<"是否恢复系统精简"<<endl<<"输入1 = 恢复 输入0 = 不恢复";
+	cin>>YN; 
 	if(YN==1)
 	{
 		system("adb shell pm able-user com.miui.BookmarkProvider");//谷歌浏览器收藏插件，接口已废除
