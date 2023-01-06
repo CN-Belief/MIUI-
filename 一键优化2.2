@@ -25,37 +25,47 @@ int main()
 	cout<<"是否禁用系统更新"<<endl<<"输入1 = 禁用 输入0 = 不禁用"<<endl;
 	cin>>YN;
 	if(YN==1)
-			{
-				system("adb shell rm -f -r /sdcard/Download/downloaded_rom");//删除系统更新包 
-				system("adb shell touch /sdcard/Download/downloaded_rom");//防止系统静默下载更新包 
-				system("adb shell rm -f -r /sdcard/downloaded_rom");//同上 
-				system("adb shell touch /sdcard/downloaded_rom");//同上 
-				cout<<"禁用成功，如有报错提示为正常现行";
-			}
+	{
+		system("adb shell rm -f -r /sdcard/Download/downloaded_rom");//删除系统更新包 
+		system("adb shell touch /sdcard/Download/downloaded_rom");//防止系统静默下载更新包 
+		system("adb shell rm -f -r /sdcard/downloaded_rom");//同上 
+		system("adb shell touch /sdcard/downloaded_rom");//同上 
+		cout<<"禁用成功，如有报错提示为正常现象"<<endl;
+	}
+	cout<<"是否禁用快应用？(禁用后广告会大幅减少)"<<endl<<"输入1 = 禁用 输入0 = 不禁用"<<endl;
+	cin>>YN;
+	if(YN==1)
+	{
+		system("adb shell pm disable-user com.miui.hybrid");//快应用服务框架
+		cout<<"禁用成功"<<endl;
+	}
 	cout<<"是否对系统应用进行精简(会禁用较多系统应用 恢复包可恢复)"<<endl<<"输入1 = 精简 输入0 = 不精简"<<endl;
 	cin>>YN;
 	if(YN==1)
-			{
-				cout<<"精简列表部分采自BV1hi4y1L7FQ 感谢"<<endl<<"如有报错 为MIUI版本不同导致 无需理会 精简将于5s后开始";
-				_sleep(5000);
-				system("adb shell pm disable-user com.miui.BookmarkProvider");//谷歌浏览器收藏插件，接口已废除
-				system("adb shell pm disable-user com.miui.AiAsstVision");//小爱相关，删除不影响小爱
-				system("adb shell pm disable-user com.miui.BasicDreams");//屏保，接口已废除
-				system("adb shell pm disable-user com.miui.BookmarkProvider");//谷歌浏览器收藏插件，接口已废除
-				system("adb shell pm disable-user com.miui.CatcherPatch");
-				system("adb shell pm disable-user com.miui.CatchLog");//收集日志 
-				system("adb shell pm disable-user com.xiaomi.powerchecker");//耗电检测 
-				system("adb shell pm disable-user com.xiaomi.payment");//米币支付 
-				system("adb shell pm disable-user com.miui.yellowpage");//生活黄页 
-				system("adb shell pm disable-user com.xiaomi.youpin");//小米有品
-				system("adb shell pm disable-user com.mfashiongallery.emag");//小米画报
-				cout<<"精简完毕"<<endl; 
-			}
+	{
+		cout<<"精简列表部分采自BV1hi4y1L7FQ 感谢"<<endl<<"如有报错 为MIUI版本不同导致 无需理会 精简将于5s后开始";
+		_sleep(5000);
+		system("adb shell pm disable-user com.miui.BookmarkProvider");//谷歌浏览器收藏插件，接口已废除
+		system("adb shell pm disable-user com.miui.AiAsstVision");//小爱相关，删除不影响小爱
+		system("adb shell pm disable-user com.miui.BasicDreams");//屏保，接口已废除
+		system("adb shell pm disable-user com.miui.BookmarkProvider");//谷歌浏览器收藏插件，接口已废除
+		system("adb shell pm disable-user com.miui.CatcherPatch");
+		system("adb shell pm disable-user com.miui.CatchLog");//收集日志 
+		system("adb shell pm disable-user com.xiaomi.powerchecker");//耗电检测 
+		system("adb shell pm disable-user com.xiaomi.payment");//米币支付 
+		system("adb shell pm disable-user com.miui.yellowpage");//生活黄页 
+		system("adb shell pm disable-user com.xiaomi.youpin");//小米有品
+		system("adb shell pm disable-user com.mfashiongallery.emag");//小米画报
+		cout<<"精简完毕"<<endl; 
+	}
 	cout<<"是否禁用小爱同学"<<endl<<"输入1 = 禁用 输入0 = 不禁用"<<endl;
+	cin>>YN;
 	if(YN==1)
-			{
-				system("adb shell pm disable-user com.miui.voiceassist");//小爱同学 
-			}
+	{
+		system("adb shell pm disable-user com.miui.voiceassist");//小爱同学
+		system("adb shell pm disable-user com.miui.voicetrigger");//语音唤醒 
+		cout<<"禁用完毕";
+	}
 	cout<<"程序运行完毕，感谢您的使用"<<endl<<"程序将于30s关闭 您也可以手动关闭";
 	_sleep(300000);
 	return 0; 
