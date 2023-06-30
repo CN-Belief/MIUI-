@@ -1,0 +1,322 @@
+#include<iostream>
+#include<stdio.h>
+#include<vector>
+#include<string.h>
+#include<unistd.h>
+#include<fstream>
+using namespace std;
+int TF=0;
+int choice;
+string app;
+void jiedong()//解除所有应用禁用 
+{
+    FILE *ABC = popen("adb shell pm list packages -d","r");
+    char BACK[1024];
+    vector<string> appInfo;
+    while(fgets(BACK, sizeof(BACK), ABC)!=NULL)
+    {
+        appInfo.push_back(BACK);
+    }
+    for(auto i=appInfo.begin();i!=appInfo.end();++i)
+    {
+        i->erase(0,8);
+        *i="adb shell pm enable "+(*i);
+    }
+    for(auto i=appInfo.begin();i!=appInfo.end();++i)
+    {
+       system(i->c_str());
+    }
+    pclose(ABC);
+}
+void SCGG()
+{
+	system("adb shell rm -f -r /sdcard/Android/data/com.miui.systemAdSolution/files");//删除开屏广告 
+	system("adb shell touch /sdcard/Android/data/com.miui.systemAdSolution/files");//防止开屏广告再生 
+}
+void youhua()//优化 
+{
+	system("adb shell pm disable-user com.miui.systemAdSolution");//禁用智能服务 
+	system("adb shell pm disable-user com.xiaomi.ab"); //禁用小米电商 
+	system("adb shell pm disable-user com.miui.bugreport");//禁用用户反馈 
+	system("adb shell pm disable-user com.miui.analytics");//禁用系统毒瘤 
+	system("adb shell rm -f -r /sdcard/Android/data/com.miui.systemAdSolution/files");//删除开屏广告 
+	system("adb shell touch /sdcard/Android/data/com.miui.systemAdSolution/files");//防止开屏广告再生 
+}
+void JYGX()//禁用自动更新
+{
+	system("adb shell rm -f -r /sdcard/Download/downloaded_rom");//删除系统更新包 
+	system("adb shell touch /sdcard/Download/downloaded_rom");//防止系统静默下载更新包 
+	system("adb shell rm -f -r /sdcard/downloaded_rom");//同上 
+	system("adb shell touch /sdcard/downloaded_rom");//同上 
+} 
+void ZT()//检查手机状态 
+{
+	  FILE *ABC = popen("adb get-state","r");
+      char BACK[1024];
+      char* result;
+	  result = fgets(BACK, sizeof(BACK), ABC);
+	  pclose(ABC);
+	  if((strstr(result,"device")!=NULL))
+	  {
+	  	TF=1;
+	  }
+}
+int main()
+{
+		start:
+		cout<<"****************************************************************"<<endl<<endl<<"作者酷安:WF_Belief B站:墨尘之一"<<endl<<"1.本程序完全免费 如您是购买所得 请立即退款"<<endl<<"2.使用前，请备份好数据，以防出现问题"<<endl<<"3.使用本程序则代表您同意接受可能带来的风险,如:数据丢失、卡米等"<<endl<<endl<<"****************************************************************"<<endl<<endl<<"本程序发布前已经过测试，但不保证您使用过程中不会出现意外情况，如有BUG或意见，欢迎私信作者反馈"<<endl;
+		cout<<"按下回车键进入程序"<<endl;
+		getchar();
+		system("cls");
+		cout<<"正在检查手机连接状态..."<<endl<<"如程序闪退 即为连接手机失败 请检查手机是否开启USB调试并给予电脑USB调试权限"<<endl;
+		sleep(3);
+		TF = 1;
+		if(TF==1){
+			zcd:
+			system("cls");
+			cout<<"请选择你要使用的功能"<<endl;
+			cout<<"【1】MIUI一键优化(禁用系统毒瘤 删除系统软件开屏广告)"<<endl<<"【2】MIUI自定义优化"<<endl<<"【3】一键恢复所有优化操作"<<endl<<"【4】自定义禁用应用"<<endl<<"【5】保留数据卸载应用"<<endl;
+			cin>>choice;
+			switch(choice)
+			{
+				case 1:
+					youhua();
+					cout<<"执行完成 即将回到上一级"<<endl;
+					sleep(3);
+					system("cls");
+					goto zcd;
+				case 2:
+					{
+					system("cls");
+					string DL="禁用"; 
+					string GX="禁用";
+					string ZN="禁用";
+					string FK="禁用";
+					string GG="禁用";
+					string KYY="禁用";
+					string YP="禁用";
+					string HY="禁用";
+					string DL1="cls"; 
+					string ZN1="cls";
+					string FK1="cls";
+					string KYY1="cls";
+					string YP1="cls";
+					string HY1="cls";
+					ABC:
+					cout<<"请输入你要进行的操作"<<endl<<"如:输入1即为将禁用系统毒瘤的状态由禁用改为启用或相反"<<endl;
+					cout<<"【1】禁用系统毒瘤 "+DL<<endl;
+					cout<<"【2】防止系统自动更新 "+GX<<endl;
+					cout<<"【3】禁用智能服务 "+ZN<<endl;
+					cout<<"【4】禁用用户反馈 "+FK<<endl;
+					cout<<"【5】删除系统应用开屏广告 "+GG<<endl;
+					cout<<"【6】禁用快应用 "+KYY<<endl;
+					cout<<"【7】禁用小米有品 "+YP<<endl;
+					cout<<"【8】禁用生活黄页 "+HY<<endl;
+					cout<<"【9】返回上一级"<<endl;
+					cout<<"【0】开始优化"<<endl;
+					cin>>choice;
+					switch (choice) {
+						case 0:
+							cout<<"开始执行"<<endl;
+							system(DL1.c_str());
+							if(GX=="启用")
+							{
+								JYGX();
+								system(ZN1.c_str());
+								system(FK1.c_str());
+								if(GG=="启用")
+								{
+									SCGG();
+									system(KYY1.c_str());
+									system(YP1.c_str());
+									system(HY1.c_str());
+									cout<<"执行完毕 即将返回上一级"<<endl;
+									sleep(3);
+									system("cls");
+									goto ABC;
+								}
+								else
+								{
+								system(KYY1.c_str());
+								system(YP1.c_str());
+								system(HY1.c_str());
+								cout<<"执行完毕 即将返回上一级"<<endl;
+								sleep(3);
+								system("cls");
+								goto ABC;
+								}
+							}
+							else
+							{
+							system(ZN1.c_str());
+							system(FK1.c_str());
+							if(GG=="启用")
+							{
+								SCGG();
+								break;
+							}
+							system(KYY1.c_str());
+							system(YP1.c_str());
+							system(HY1.c_str());
+							cout<<"执行完毕 即将返回上一级"<<endl;
+							sleep(3);
+							system("cls");
+							goto ABC;
+							}
+						case 1:
+							if(DL == "禁用")
+							{
+								DL = "启用";
+								DL1 = "adb shell pm disable-user com.miui.analytics";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								DL = "禁用";
+								DL1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 2:
+							if(GX == "禁用")
+							{
+								GX = "启用";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								GX = "禁用";
+								system("cls");
+								goto ABC;
+							}
+						case 3:
+							if(ZN == "禁用")
+							{
+								ZN = "启用";
+								ZN1 = "adb shell pm disable-user com.miui.systemAdSolution";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								ZN = "禁用";
+								ZN1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 4:
+							if(FK == "禁用")
+							{
+								FK = "启用";
+								FK1 = "adb shell pm disable-user com.miui.bugreport";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								FK = "禁用";
+								FK1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 5:
+							if(GG == "禁用")
+							{
+								GG = "启用";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								GG = "禁用";
+								system("cls");
+								goto ABC;
+							}
+						case 6:
+							if(KYY == "禁用")
+							{
+								KYY = "启用";
+								KYY1 = "adb shell pm disable-user com.miui.hybrid" ;
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								KYY = "禁用";
+								KYY1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 7:
+							if(YP == "禁用")
+							{
+								YP = "启用";
+								YP1 = "adb shell pm disable-user com.xiaomi.youpin";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								YP = "禁用";
+								YP1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 8:
+							if(HY == "禁用")
+							{
+								HY = "启用";
+								HY1 = "adb shell pm disable-user com.miui.yellowpage";
+								system("cls");
+								goto ABC;
+							}
+							else
+							{
+								HY = "禁用";
+								HY1 = "cls";
+								system("cls");
+								goto ABC;
+							}
+						case 9:
+							goto zcd;
+						default:
+							cout<<"输入错误"<<endl;
+							goto ABC;
+							break;
+					}
+					}
+				case 3:
+					jiedong();
+					system("adb shell rm -f -r /sdcard/Android/data/com.miui.systemAdSolution/files");
+					system("adb shell rm -f -r /sdcard/Download/downloaded_rom");
+					system("adb shell rm -f -r /sdcard/downloaded_rom");
+					cout<<"执行完成 即将返回上一级"<<endl;
+					sleep(3);
+					system("cls");
+					goto zcd;
+				case 4:
+					cout<<"请输入你要禁用的应用包名:"<<endl;
+					cin>>app;
+					app = "adb shell pm disable-user "+app;
+					system(app.c_str());
+					system("cls");
+					cout<<"禁用成功 即将返回上一级"<<endl;
+					sleep(3);
+					goto zcd;
+				case 5:
+					cout<<"请输入你要卸载的应用包名:"<<endl; 
+					cin>>app;
+					app = "adb uninstall -k"+app;
+					system(app.c_str());
+					system("cls");
+					cout<<"卸载完成 即将返回上一级"<<endl;
+					sleep(3);
+					goto zcd; 
+					
+			}
+		}
+
+		
+}
